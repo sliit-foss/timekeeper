@@ -1,0 +1,66 @@
+{
+  "name": "timekeeper",
+  "displayName": "template",
+  "description": "A vscode extension to analyze and display the time taken for the execution of the multiple code blocks comprising of an express REST API endpoint",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "activationEvents": [
+    "onCommand:timkeeper.welcome"
+  ],
+  "main": "./src/index.js",
+  "contributes": {
+    "commands": [{
+      "command": "timekeeper.probe",
+      "title": "Welcome"
+    }],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "timekeeper",
+          "title": "Timekeeper",
+          "icon": "assets/logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "timekeeper": [
+        {
+          "id": "guide",
+          "name": "Guide"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "guide",
+        "contents": "Welcome to Timekeeper!\nTimekeeper helps break down the execution time of the code blocks which comprise your API Endpoint thus allowing you to identify the heavier logics and optimize them for speed.\n\nClick below to see if the extension is alive and kicking!\n[Check Status](command:timekeeper.probe)\n\nMade with ❤️ by the [SLIIT FOSS Community](https://sliitfoss.org)",
+        "when": "workbenchState == empty"
+      },
+      {
+        "view": "options",
+        "contents": "[Execute](command:timekeeper.executeFunction)\n"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "pnpm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "eslint": "^8.28.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.1.0",
+    "typescript": "^4.9.3",
+    "@vscode/test-electron": "^2.2.0"
+  }
+}
