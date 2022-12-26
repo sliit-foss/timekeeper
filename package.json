@@ -14,10 +14,31 @@
   ],
   "main": "./src/index.js",
   "contributes": {
-    "commands": [{
-      "command": "timekeeper.probe",
-      "title": "Welcome"
-    }],
+    "commands": [
+      {
+        "command": "timekeeper.probe",
+        "title": "Welcome"
+      },
+      {
+        "command": "timekeeper.executeFunction",
+        "title": "Execute Function"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "timekeeper.executeFunction",
+        "key": "ctrl+alt+e"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "!inOutput",
+          "command": "timekeeper.executeFunction",
+          "group": "navigation"
+        }
+      ]
+    },
     "viewsContainers": {
       "activitybar": [
         {
@@ -30,22 +51,30 @@
     "views": {
       "timekeeper": [
         {
-          "id": "guide",
-          "name": "Guide"
+          "id": "intro",
+          "name": "Introduction"
+        },
+        {
+          "id": "actions",
+          "name": "Actions"
         }
       ]
     },
     "viewsWelcome": [
       {
-        "view": "guide",
-        "contents": "Welcome to Timekeeper!\nTimekeeper helps break down the execution time of the code blocks which comprise your API Endpoint thus allowing you to identify the heavier logics and optimize them for speed.\n\nClick below to see if the extension is alive and kicking!\n[Check Status](command:timekeeper.probe)\n\nMade with ❤️ by the [SLIIT FOSS Community](https://sliitfoss.org)",
-        "when": "workbenchState == empty"
+        "view": "intro",
+        "contents": "Welcome to Timekeeper!\nTimekeeper helps break down the execution time of the code blocks which comprise your API Endpoint thus allowing you to identify the heavier logics and optimize them for speed.\n\nClick below to see if the extension is alive and kicking!\n[Check Status](command:timekeeper.probe)\n\nMade with ❤️ by the [SLIIT FOSS Community](https://sliitfoss.org)"
       },
       {
-        "view": "options",
-        "contents": "[Execute](command:timekeeper.executeFunction)\n"
+        "view": "actions",
+        "contents": "[Execute Function](command:timekeeper.executeFunction)\n"
       }
     ]
+  },
+  "configuration": {
+    "type": "object",
+    "title": "Timekeeper",
+    "properties": {}
   },
   "scripts": {
     "lint": "eslint .",
@@ -53,14 +82,17 @@
     "test": "node ./test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.74.0",
-    "@types/glob": "^8.0.0",
-    "@types/mocha": "^10.0.1",
+    "@types/glob": "8.0.0",
+    "@types/mocha": "10.0.1",
     "@types/node": "16.x",
-    "eslint": "^8.28.0",
-    "glob": "^8.0.3",
-    "mocha": "^10.1.0",
-    "typescript": "^4.9.3",
-    "@vscode/test-electron": "^2.2.0"
+    "@types/vscode": "1.74.0",
+    "@vscode/test-electron": "2.2.0",
+    "eslint": "8.28.0",
+    "glob": "8.0.3",
+    "mocha": "10.1.0",
+    "typescript": "4.9.3"
+  },
+  "dependencies": {
+    "actions-exec-wrapper": "1.0.3"
   }
 }
